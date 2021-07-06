@@ -5,8 +5,7 @@ import 'package:tema5/models/app_state.dart';
 import 'package:tema5/models/movie.dart';
 
 class SelectedMovieContainer extends StatelessWidget {
-  const SelectedMovieContainer({Key? key, required this.builder})
-      : super(key: key);
+  const SelectedMovieContainer({Key? key, required this.builder}) : super(key: key);
 
   final ViewModelBuilder<Movie> builder;
 
@@ -15,8 +14,7 @@ class SelectedMovieContainer extends StatelessWidget {
     return StoreConnector<AppState, Movie>(
       converter: (Store<AppState> store) {
         print('container_selected');
-        return store.state.movies
-            .firstWhere((Movie item) => item.id == store.state.selectedMovie);
+        return store.state.movies.firstWhere((Movie item) => item.id == store.state.selectedMovie);
       },
       builder: builder,
     );

@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onScroll() {
-    final isLoading = StoreProvider.of<AppState>(context).state.isLoading;
+    final bool isLoading = StoreProvider.of<AppState>(context).state.isLoading;
     final double max = _controller.position.maxScrollExtent;
     final double offset = _controller.offset;
     final double delta = max - offset;
@@ -33,8 +33,7 @@ class _HomePageState extends State<HomePage> {
     final double threshold = screenHeight * 0.2;
 
     if (delta < threshold && !isLoading) {
-      StoreProvider.of<AppState>(context)
-          .dispatch(GetMovies(StoreProvider.of<AppState>(context).state.page));
+      StoreProvider.of<AppState>(context).dispatch(GetMovies(StoreProvider.of<AppState>(context).state.page));
     }
   }
 
@@ -48,22 +47,22 @@ class _HomePageState extends State<HomePage> {
     return MovieContainer(builder: (BuildContext context, List<Movie> movies) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Movies'),
+          title: const Text('Movies'),
           actions: <Widget>[
             IsLoadingContainer(
               builder: (BuildContext context, bool isLoading) {
                 if (isLoading) {
                   print('intra');
-                  return Center(
-                      child: CircularProgressIndicator(
-                    backgroundColor: Colors.white,
-                  ));
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  );
                 }
                 return IconButton(
-                  icon: Icon(Icons.refresh),
+                  icon: const Icon(Icons.refresh),
                   onPressed: () {
-                    final Store<AppState> store =
-                        StoreProvider.of<AppState>(context);
+                    final Store<AppState> store = StoreProvider.of<AppState>(context);
                     store.dispatch(GetMovies(store.state.page));
                   },
                 );
@@ -73,10 +72,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: .69,
-              mainAxisSpacing: 2.0,
-              crossAxisSpacing: 2.0),
+              crossAxisCount: 2, childAspectRatio: .69, mainAxisSpacing: 2.0, crossAxisSpacing: 2.0),
           controller: _controller,
           itemCount: movies.length,
           itemBuilder: (BuildContext context, int index) {
@@ -84,8 +80,7 @@ class _HomePageState extends State<HomePage> {
             print('home_page $index');
             return GestureDetector(
               onTap: () {
-                StoreProvider.of<AppState>(context)
-                    .dispatch(SetSelectedMovie(movie.id));
+                StoreProvider.of<AppState>(context).dispatch(SetSelectedMovie(movie.id));
                 Navigator.pushNamed(context, '/details');
               },
               child: GridTile(

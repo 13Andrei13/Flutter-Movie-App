@@ -11,13 +11,13 @@ import 'package:tema5/presentation/movie_details.dart';
 import 'package:tema5/reducer/reducer.dart';
 
 void main() {
-  final String apiUrl = 'https://yts.mx/api/v2/';
+  const String apiUrl = 'https://yts.mx/api/v2/';
 
   final Client client = Client();
 
   final MoviesApi moviesApi = MoviesApi(apiUrl: apiUrl, client: client);
 
-  AppMiddleware appMiddleware = AppMiddleware(moviesApi: moviesApi);
+  final AppMiddleware appMiddleware = AppMiddleware(moviesApi: moviesApi);
 
   final Store<AppState> store = Store<AppState>(
     reducer,
@@ -39,11 +39,11 @@ class YtsApp extends StatelessWidget {
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
-        home: HomePage(),
+        home: const HomePage(),
         theme: ThemeData.dark(),
         routes: <String, WidgetBuilder>{
           '/details': (BuildContext context) {
-            return MovieDetails();
+            return const MovieDetails();
           }
         },
       ),

@@ -1,9 +1,9 @@
+import 'package:redux/redux.dart';
 import 'package:tema5/actions/get_movies.dart';
 import 'package:tema5/models/app_state.dart';
 import 'package:tema5/models/movie.dart';
 
 import '../data/movies_api.dart';
-import 'package:redux/redux.dart';
 
 class AppMiddleware {
   const AppMiddleware({required MoviesApi moviesApi}) : _moviesApi = moviesApi;
@@ -12,13 +12,11 @@ class AppMiddleware {
 
   List<Middleware<AppState>> get middleware {
     return <Middleware<AppState>>[
-      TypedMiddleware<AppState, GetMovies>(
-          _getMovies), // AppState -> de unde raspunde si  GetMovies -> unde merge
+      TypedMiddleware<AppState, GetMovies>(_getMovies), // AppState -> de unde raspunde si  GetMovies -> unde merge
     ];
   }
 
-  Future<void> _getMovies(
-      Store<AppState> store, GetMovies action, NextDispatcher next) async {
+  Future<void> _getMovies(Store<AppState> store, GetMovies action, NextDispatcher next) async {
     next(action);
     try {
       print('mid_getMovie_ok');
