@@ -16,4 +16,9 @@ class GetMoviesError {
   GetMoviesError(this.error);
 
   final Object error;
+
+  @override
+  String toString() {
+    return 'GetMoviesError{error: $error}';
+  }
 }

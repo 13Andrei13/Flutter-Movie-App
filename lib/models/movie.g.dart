@@ -35,18 +35,18 @@ class _$MovieSerializer implements StructuredSerializer<Movie> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current! as String;
+      final key = iterator.current as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'id':
-          result.id = serializers.deserialize(value, specifiedType: const FullType(int))! as int;
+          result.id = serializers.deserialize(value, specifiedType: const FullType(int)) as int;
           break;
         case 'title':
-          result.title = serializers.deserialize(value, specifiedType: const FullType(String))! as String;
+          result.title = serializers.deserialize(value, specifiedType: const FullType(String)) as String;
           break;
         case 'medium_cover_image':
-          result.image = serializers.deserialize(value, specifiedType: const FullType(String))! as String;
+          result.image = serializers.deserialize(value, specifiedType: const FullType(String)) as String;
           break;
       }
     }
@@ -98,21 +98,15 @@ class MovieBuilder implements Builder<Movie, MovieBuilder> {
   _$Movie? _$v;
 
   int? _id;
-
   int? get id => _$this._id;
-
   set id(int? id) => _$this._id = id;
 
   String? _title;
-
   String? get title => _$this._title;
-
   set title(String? title) => _$this._title = title;
 
   String? _image;
-
   String? get image => _$this._image;
-
   set image(String? image) => _$this._image = image;
 
   MovieBuilder();

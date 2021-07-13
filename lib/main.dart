@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:http/http.dart';
 import 'package:redux/redux.dart';
+import 'package:redux_epics/redux_epics.dart';
 import 'package:tema5/actions/get_movies.dart';
 import 'package:tema5/data/movies_api.dart';
-import 'package:tema5/middleware/movies_middleware.dart';
+import 'package:tema5/epics/app_epics.dart';
 import 'package:tema5/models/app_state.dart';
 import 'package:tema5/presentation/home_page.dart';
 import 'package:tema5/presentation/movie_details.dart';
@@ -17,12 +18,14 @@ void main() {
 
   final MoviesApi moviesApi = MoviesApi(apiUrl: apiUrl, client: client);
 
-  final AppMiddleware appMiddleware = AppMiddleware(moviesApi: moviesApi);
+  final AppEpics epic = AppEpics(moviesApi: moviesApi);
 
   final Store<AppState> store = Store<AppState>(
     reducer,
     initialState: AppState(),
-    middleware: appMiddleware.middleware,
+    middleware: <Middleware<AppState>>[
+      EpicMiddleware<AppState>(epic.epics),
+    ],
   );
 
   store.dispatch(GetMovies(store.state.page));

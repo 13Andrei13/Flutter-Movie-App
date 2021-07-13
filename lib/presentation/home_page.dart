@@ -44,59 +44,65 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MovieContainer(builder: (BuildContext context, List<Movie> movies) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Movies'),
-          actions: <Widget>[
-            IsLoadingContainer(
-              builder: (BuildContext context, bool isLoading) {
-                if (isLoading) {
-                  print('intra');
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                    ),
+    return MovieContainer(
+      builder: (BuildContext context, List<Movie> movies) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Movies'),
+            actions: <Widget>[
+              IsLoadingContainer(
+                builder: (BuildContext context, bool isLoading) {
+                  if (isLoading) {
+                    print('intra');
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                      ),
+                    );
+                  }
+                  return IconButton(
+                    icon: const Icon(Icons.refresh),
+                    onPressed: () {
+                      final Store<AppState> store = StoreProvider.of<AppState>(context);
+                      store.dispatch(GetMovies(store.state.page));
+                    },
                   );
-                }
-                return IconButton(
-                  icon: const Icon(Icons.refresh),
-                  onPressed: () {
-                    final Store<AppState> store = StoreProvider.of<AppState>(context);
-                    store.dispatch(GetMovies(store.state.page));
-                  },
-                );
-              },
-            ), //refresh
-          ],
-        ),
-        body: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, childAspectRatio: .69, mainAxisSpacing: 2.0, crossAxisSpacing: 2.0),
-          controller: _controller,
-          itemCount: movies.length,
-          itemBuilder: (BuildContext context, int index) {
-            final Movie movie = movies[index];
-            print('home_page $index');
-            return GestureDetector(
-              onTap: () {
-                StoreProvider.of<AppState>(context).dispatch(SetSelectedMovie(movie.id));
-                Navigator.pushNamed(context, '/details');
-              },
-              child: GridTile(
-                child: Image.network(
-                  movie.image,
-                  fit: BoxFit.cover,
+                },
+              ), //refresh
+            ],
+          ),
+          body: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: .69,
+              mainAxisSpacing: 2.0,
+              crossAxisSpacing: 2.0,
+            ),
+            controller: _controller,
+            itemCount: movies.length,
+            itemBuilder: (BuildContext context, int index) {
+              final Movie movie = movies[index];
+              print('home_page $index');
+              return GestureDetector(
+                onTap: () {
+                  StoreProvider.of<AppState>(context).dispatch(SetSelectedMovie(movie.id));
+                  Navigator.pushNamed(context, '/details');
+                },
+                child: GridTile(
+                  child: Image.network(
+                    movie.image,
+                    fit: BoxFit.cover,
+                  ),
+                  footer: GridTileBar(
+                    backgroundColor: Colors.black38,
+                    title: Text('$index. ${movie.title}'),
+                  ),
                 ),
-                footer: GridTileBar(
-                  backgroundColor: Colors.black38,
-                  title: Text('$index. ${movie.title}'),
-                ),
-              ),
-            );
-          },
-        ),
-      );
-    });
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 }

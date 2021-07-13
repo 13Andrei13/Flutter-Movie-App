@@ -44,7 +44,7 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current!;
+      final key = iterator.current as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -53,13 +53,13 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
               specifiedType: const FullType(BuiltList, const [const FullType(Movie)]))! as BuiltList<Object?>);
           break;
         case 'isLoading':
-          result.isLoading = serializers.deserialize(value, specifiedType: const FullType(bool))! as bool;
+          result.isLoading = serializers.deserialize(value, specifiedType: const FullType(bool)) as bool;
           break;
         case 'error':
           result.error = serializers.deserialize(value, specifiedType: const FullType(String)) as String?;
           break;
         case 'page':
-          result.page = serializers.deserialize(value, specifiedType: const FullType(int))! as int;
+          result.page = serializers.deserialize(value, specifiedType: const FullType(int)) as int;
           break;
         case 'selectedMovie':
           result.selectedMovie = serializers.deserialize(value, specifiedType: const FullType(int)) as int?;
@@ -131,33 +131,23 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   _$AppState? _$v;
 
   ListBuilder<Movie>? _movies;
-
   ListBuilder<Movie> get movies => _$this._movies ??= new ListBuilder<Movie>();
-
   set movies(ListBuilder<Movie>? movies) => _$this._movies = movies;
 
   bool? _isLoading;
-
   bool? get isLoading => _$this._isLoading;
-
   set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
 
   String? _error;
-
   String? get error => _$this._error;
-
   set error(String? error) => _$this._error = error;
 
   int? _page;
-
   int? get page => _$this._page;
-
   set page(int? page) => _$this._page = page;
 
   int? _selectedMovie;
-
   int? get selectedMovie => _$this._selectedMovie;
-
   set selectedMovie(int? selectedMovie) => _$this._selectedMovie = selectedMovie;
 
   AppStateBuilder();

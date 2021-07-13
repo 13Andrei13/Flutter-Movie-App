@@ -13,7 +13,9 @@ class MovieDetails extends StatelessWidget {
           appBar: AppBar(
             title: Text(movie.title),
           ),
-          body: FittedBox(child: Image.network(movie.image)),
+          body: FittedBox(
+            child: Image.network(movie.image),
+          ),
         );
       },
     );
