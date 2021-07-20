@@ -1,24 +1,11 @@
-import 'package:tema5/models/movie.dart';
+part of actions;
 
-class GetMovies {
-  GetMovies(this.page);
+@freezed
+class GetMovies with _$GetMovies implements AppAction {
+  const factory GetMovies() = GetMoviesStart;
 
-  final int page;
-}
+  const factory GetMovies.successful(List<Movie> movies) = GetMoviesSuccessful;
 
-class GetMoviesSuccessful {
-  GetMoviesSuccessful(this.movies);
-
-  final List<Movie> movies;
-}
-
-class GetMoviesError {
-  GetMoviesError(this.error);
-
-  final Object error;
-
-  @override
-  String toString() {
-    return 'GetMoviesError{error: $error}';
-  }
+  @Implements(ErrorAction)
+  const factory GetMovies.error(Object error, StackTrace stackTrace) = GetMoviesError;
 }

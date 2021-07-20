@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:tema5/models/movie.dart';
+import 'package:tema5/models/index.dart';
 import 'package:http/http.dart';
 
 class MoviesApi {

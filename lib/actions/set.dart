@@ -1,10 +1,6 @@
-class SetSelectedMovie {
-  SetSelectedMovie(this.movieId);
+part of actions;
 
-  final int movieId;
-
-  @override
-  String toString() {
-    return 'SetSelectedMovie{movieId: $movieId}';
-  }
+@freezed
+class SetSelectedMovie with _$SetSelectedMovie implements AppAction {
+  const factory SetSelectedMovie(int movieId) = SetSelectedMovie$;
 }

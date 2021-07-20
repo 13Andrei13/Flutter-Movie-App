@@ -1,7 +1,6 @@
-import 'package:redux/redux.dart';
+/*import 'package:redux/redux.dart';
 import 'package:tema5/actions/get_movies.dart';
-import 'package:tema5/models/app_state.dart';
-import 'package:tema5/models/movie.dart';
+import 'package:tema5/models/index.dart';
 
 import '../data/movies_api.dart';
 
@@ -20,11 +19,13 @@ class AppMiddleware {
     next(action);
     try {
       print('mid_getMovie_ok');
-      final List<Movie> movies = await _moviesApi.getMovies(action.page);
-      store.dispatch(GetMoviesSuccessful(movies));
+      final List<Movie> movies = await _moviesApi.getMovies(store.state.page);
+      store.dispatch(GetMovies.successful(movies));
     } catch (error) {
       print('mid_getMovie_error');
-      store.dispatch(GetMoviesError(error));
+
+      store.dispatch(GetMovies.error(error, stackTrace));
     }
   }
 }
+*/

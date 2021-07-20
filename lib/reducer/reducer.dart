@@ -1,9 +1,8 @@
 //Action + State => State
 
 import 'package:redux/redux.dart';
-import 'package:tema5/actions/get_movies.dart';
-import 'package:tema5/actions/set.dart';
-import 'package:tema5/models/app_state.dart';
+import 'package:tema5/actions/index.dart';
+import 'package:tema5/models/index.dart';
 
 Reducer<AppState> reducer = combineReducers(<Reducer<AppState>>[
   //test
@@ -15,7 +14,7 @@ Reducer<AppState> reducer = combineReducers(<Reducer<AppState>>[
 
   TypedReducer<AppState, GetMoviesSuccessful>(_getMoviesSuccessful),
   TypedReducer<AppState, GetMoviesError>(_getMoviesError),
-  TypedReducer<AppState, GetMovies>(_getMovies),
+  TypedReducer<AppState, GetMoviesStart>(_getMovies),
   TypedReducer<AppState, SetSelectedMovie>(_setSelectedMovie),
 ]);
 
@@ -38,7 +37,7 @@ AppState _getMoviesError(AppState state, GetMoviesError action) {
   });
 }
 
-AppState _getMovies(AppState state, GetMovies action) {
+AppState _getMovies(AppState state, GetMoviesStart action) {
   return state.rebuild((AppStateBuilder b) {
     b.isLoading = true;
     print('reducer_?');

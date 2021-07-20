@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:tema5/actions/get_movies.dart';
-import 'package:tema5/actions/set.dart';
+import 'package:tema5/actions/index.dart';
 import 'package:tema5/container/is_loading_container.dart';
 import 'package:tema5/container/movies_container.dart';
-import 'package:tema5/models/app_state.dart';
-import 'package:tema5/models/movie.dart';
+import 'package:tema5/models/index.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -33,10 +31,11 @@ class _HomePageState extends State<HomePage> {
     final double threshold = screenHeight * 0.2;
 
     if (delta < threshold && !isLoading) {
-      StoreProvider.of<AppState>(context).dispatch(GetMovies(StoreProvider.of<AppState>(context).state.page));
+      StoreProvider.of<AppState>(context).dispatch(const GetMoviesStart());
     }
   }
 
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
@@ -64,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                     icon: const Icon(Icons.refresh),
                     onPressed: () {
                       final Store<AppState> store = StoreProvider.of<AppState>(context);
-                      store.dispatch(GetMovies(store.state.page));
+                      store.dispatch(const GetMovies());
                     },
                   );
                 },
