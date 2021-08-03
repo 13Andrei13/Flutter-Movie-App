@@ -6,5 +6,6 @@ import 'package:built_value/serializer.dart';
 import 'package:tema5/models/serializers.dart';
 
 part 'app_state.dart';
+part 'app_user.dart';
 part 'index.g.dart';
 part 'movie.dart';

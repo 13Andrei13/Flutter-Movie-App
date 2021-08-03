@@ -12,6 +12,8 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
 
   AppState._();
 
+  AppUser? get user;
+
   BuiltList<Movie> get movies;
 
   bool get isLoading;

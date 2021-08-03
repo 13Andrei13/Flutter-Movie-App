@@ -5,6 +5,7 @@ import 'package:tema5/actions/index.dart';
 import 'package:tema5/container/is_loading_container.dart';
 import 'package:tema5/container/movies_container.dart';
 import 'package:tema5/models/index.dart';
+import 'package:tema5/presentation/user_avatar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -48,6 +49,7 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Movies'),
+            leading: const UserAvatar(),
             actions: <Widget>[
               IsLoadingContainer(
                 builder: (BuildContext context, bool isLoading) {

@@ -5,7 +5,10 @@ import 'package:tema5/models/index.dart';
 
 part 'get_movies.dart';
 part 'index.freezed.dart';
+part 'initialize_app.dart';
+part 'register.dart';
 part 'set.dart';
+part 'sign_out.dart';
 
 abstract class AppAction {}
 
@@ -14,3 +17,5 @@ abstract class ErrorAction implements AppAction {
 
   StackTrace get stackTrace;
 }
+
+typedef ActionResult = void Function(AppAction action);
